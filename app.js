@@ -22,7 +22,6 @@
 // //     response.status(200).json({message: "Hello, I'm Trishia!"})
 // // });
 
-// app.use('/books', bookRoutes);
 
 import express from "express";
 import 'dotenv/config.js';
