@@ -1,47 +1,31 @@
-<<<<<<< HEAD
-// import express from "express";
-// import 'dotenv/config.js';
-// import bookRoutes from "./routers/BookRoutes.js";
-
-// const app = express();
-
-// // app.use(express.json());
-
-// // const port = 3000;
-
-// app.use(express.json());
-
-// try{
-//     app.listen(process.env.PORT || 3000, () =>{
-//     console.log(`Listening to port ${process.env.PORT || 3000}...`);
-//     });
-// }catch(e){
-//     console.log(e);
-// }
-
-// // app.get('/Trishia', async(request, response) =>{
-// //     response.status(200).json({message: "Hello, I'm Trishia!"})
-// // });
-
-
-=======
->>>>>>> parent of c0e8948 (tapos na po)
 import express from "express";
+import 'dotenv/config.js';
+import cors from 'cors';
+import bookRoutes from "./routers/BookRoutes.js";
+import studentRoutes from "./routers/StudentRoutes.js";
 
+// create express app
 const app = express();
+let corsOptions = {
+    origin : process.env.ORIGIN
+};
 
+// middleware
 app.use(express.json());
+app.use(cors(corsOptions));
 
-const port = 3000;
+app.use((req, res, next) => {
+    console.log(req.path, req.method);
+    next();
+});
 
-try{
-    app.listen(port, () =>{
-    console.log('Listening to port 3000...')
+app.use('/books', bookRoutes);
+app.use('/students', studentRoutes);
+
+try {
+    app.listen(process.env.PORT || 3000, () => {
+        console.log(`Listening on port ${process.env.PORT || 3000}...`);
     });
-}catch(e){
+} catch (e) {
     console.log(e);
 }
-
-app.get('/Trishia', async(request, response) =>{
-    response.status(200).json({message: "Hello, I'm Trishia!"})
-});
