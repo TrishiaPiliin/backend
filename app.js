@@ -1,6 +1,7 @@
 import express from "express";
 import 'dotenv/config.js';
 import cors from 'cors';
+import UserRoutes from "./routers/UserRoutes.js";
 import bookRoutes from "./routers/BookRoutes.js";
 import studentRoutes from "./routers/StudentRoutes.js";
 
@@ -21,6 +22,8 @@ app.use((req, res, next) => {
 
 app.use('/books', bookRoutes);
 app.use('/students', studentRoutes);
+app.use('/users', UserRoutes);
+
 
 try {
     app.listen(process.env.PORT || 3000, () => {
